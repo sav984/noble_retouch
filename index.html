@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Photo Retouch — профессиональная обработка фотографий</title>
+  <meta name="description" content="Профессиональная ретушь, восстановление старых фотографий, цветокоррекция и художественная обработка. Естественный результат без пластиковой кожи.">
+  <meta name="theme-color" content="#171716">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --black:#171716;
+      --ink:#242321;
+      --muted:#77736b;
+      --cream:#f7f4ed;
+      --paper:#fffdf8;
+      --line:rgba(36,35,33,.13);
+      --gold:#c5a66a;
+      --gold2:#a9874e;
+      --max:1180px;
+      --serif:"Cormorant Garamond", Georgia, serif;
+      --sans:"Montserrat", Arial, sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--cream);
+      color:var(--ink);
+      font-family:var(--sans);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body.lock{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input{font:inherit}
+    .container{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .serif{font-family:var(--serif)}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:12px;
+      color:var(--gold2);font-size:11px;font-weight:600;
+      letter-spacing:.24em;text-transform:uppercase
+    }
+    .eyebrow:before{content:"";width:32px;height:1px;background:currentColor}
+    .section{padding:110px 0}
+    .section-head{max-width:720px;margin-bottom:55px}
+    .section-head.center{text-align:center;margin-left:auto;margin-right:auto}
+    .section-title{
+      margin:14px 0 18px;
+      font:500 clamp(42px,6vw,72px)/.95 var(--serif);
+      letter-spacing:-.025em
+    }
+    .section-title em{color:var(--gold2);font-style:italic}
+    .lead{font-size:16px;line-height:1.9;color:var(--muted);font-weight:300}
+
+    /* Header */
+    .header{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      border-bottom:1px solid transparent;
+      transition:.35s ease;
+      color:#fff;
+    }
+    .header.scrolled{
+      background:rgba(23,23,22,.92);
+      backdrop-filter:blur(16px);
+      border-color:rgba(255,255,255,.1);
+    }
+    .nav{
+      height:78px;display:flex;align-items:center;justify-content:space-between;
+      gap:30px
+    }
+    .brand{display:flex;align-items:center;gap:13px;white-space:nowrap}
+    .brand-mark{
+      width:34px;height:34px;border:1px solid var(--gold);
+      display:grid;place-items:center;border-radius:50%;
+      color:var(--gold);font:500 18px var(--serif)
+    }
+    .brand-text{font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+    .nav-links{display:flex;gap:30px;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+    .nav-links a{opacity:.82;transition:.25s}
+    .nav-links a:hover{color:var(--gold);opacity:1}
+    .nav-cta{
+      border:1px solid rgba(255,255,255,.45);
+      padding:11px 16px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+      transition:.25s
+    }
+    .nav-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+    .menu{display:none;background:none;border:0;color:#fff;font-size:25px}
+
+    /* Hero */
+    .hero{
+      min-height:100svh;position:relative;display:flex;align-items:center;
+      color:#fff;background:var(--black);overflow:hidden
+    }
+    .hero-bg{position:absolute;inset:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.43;filter:saturate(.7)}
+    .hero-bg:after{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,rgba(15,15,14,.88),rgba(15,15,14,.42) 55%,rgba(15,15,14,.72)),
+        linear-gradient(0deg,#171716 0,transparent 42%,rgba(0,0,0,.2));
+    }
+    .hero-content{position:relative;z-index:2;padding:150px 0 90px;max-width:850px}
+    .hero h1{
+      margin:22px 0 25px;
+      font:500 clamp(55px,8vw,105px)/.82 var(--serif);
+      letter-spacing:-.035em
+    }
+    .hero h1 span{display:block;color:#dfc895;font-style:italic;margin-left:12%}
+    .hero-copy{max-width:610px;font-size:16px;line-height:1.8;color:rgba(255,255,255,.78);font-weight:300}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:35px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;min-height:52px;
+      padding:0 25px;border:1px solid transparent;font-size:10px;
+      font-weight:600;letter-spacing:.18em;text-transform:uppercase;transition:.3s
+    }
+    .btn-gold{background:var(--gold);color:var(--black)}
+    .btn-gold:hover{background:#e0c68e;transform:translateY(-2px)}
+    .btn-outline{border-color:rgba(255,255,255,.45);color:#fff}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+    .hero-note{margin-top:50px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+    /* Intro */
+    .split{display:grid;grid-template-columns:1fr 1.25fr;gap:80px;align-items:end}
+    .intro-number{font:400 120px/.7 var(--serif);color:rgba(197,166,106,.25);margin-bottom:30px}
+    .quote{
+      border-left:1px solid var(--gold);padding-left:25px;
+      font:400 28px/1.25 var(--serif);max-width:520px
+    }
+
+    /* Before after */
+    .compare{
+      position:relative;max-width:980px;margin:auto;aspect-ratio:16/10;
+      overflow:hidden;background:#ddd;box-shadow:0 22px 65px rgba(0,0,0,.16)
+    }
+    .compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none}
+    .compare-after{filter:none}
+    .compare-before{filter:grayscale(.75) contrast(.86) brightness(.94)}
+    .compare-before-wrap{
+      position:absolute;inset:0 auto 0 0;width:50%;overflow:hidden;z-index:2
+    }
+    .compare-before-wrap img{width:100vw;max-width:none}
+    .compare-range{
+      position:absolute;inset:0;width:100%;height:100%;opacity:0;z-index:5;cursor:ew-resize
+    }
+    .compare-line{
+      position:absolute;top:0;bottom:0;left:50%;width:1px;background:#fff;z-index:4;
+      box-shadow:0 0 18px rgba(0,0,0,.3);pointer-events:none
+    }
+    .compare-handle{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:56px;height:56px;border:1px solid rgba(255,255,255,.8);
+      background:rgba(255,255,255,.94);color:var(--black);border-radius:50%;
+      display:grid;place-items:center;font-size:18px
+    }
+    .compare-label{
+      position:absolute;bottom:18px;z-index:4;color:#fff;
+      font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+      text-shadow:0 2px 8px #000
+    }
+    .before-label{left:20px}.after-label{right:20px}
+
+    /* Services */
+    .dark{background:var(--black);color:#fff}
+    .dark .lead{color:rgba(255,255,255,.62)}
+    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.13)}
+    .service{
+      min-height:270px;background:var(--black);padding:42px;
+      position:relative;transition:.35s
+    }
+    .service:hover{background:#20201e}
+    .service-num{font:400 38px var(--serif);color:var(--gold);display:block;margin-bottom:32px}
+    .service h3{margin:0 0 13px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+    .service p{margin:0;color:rgba(255,255,255,.58);font-size:13px;line-height:1.8;font-weight:300}
+    .service-price{position:absolute;right:35px;top:40px;color:var(--gold);font:400 20px var(--serif)}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .gallery-item{position:relative;overflow:hidden;cursor:pointer;background:#ddd}
+    .gallery-item:nth-child(1){grid-column:span 5;aspect-ratio:4/5}
+    .gallery-item:nth-child(2){grid-column:span 7;aspect-ratio:7/5}
+    .gallery-item:nth-child(3){grid-column:span 4;aspect-ratio:4/5}
+    .gallery-item:nth-child(4){grid-column:span 4;aspect-ratio:4/5}
+    .gallery-item:nth-child(5){grid-column:span 4;aspect-ratio:4/5}
+    .gallery-item:nth-child(6){grid-column:span 7;aspect-ratio:7/5}
+    .gallery-item:nth-child(7){grid-column:span 5;aspect-ratio:5/4}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s,filter .8s}
+    .gallery-item:after{
+      content:"Открыть";position:absolute;inset:auto 15px 15px auto;
+      padding:9px 11px;background:rgba(23,23,22,.72);color:#fff;
+      font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:0;transition:.3s
+    }
+    .gallery-item:hover img{transform:scale(1.04);filter:saturate(.9)}
+    .gallery-item:hover:after{opacity:1}
+
+    /* Pricing */
+    .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+    .price-card{
+      position:relative;padding:42px 34px;background:var(--paper);border:1px solid var(--line);
+      display:flex;flex-direction:column
+    }
+    .price-card.featured{border:1px solid var(--gold);transform:translateY(-12px);box-shadow:0 25px 60px rgba(0,0,0,.1)}
+    .badge{
+      position:absolute;top:0;left:50%;transform:translate(-50%,-50%);
+      background:var(--gold);padding:7px 15px;font-size:8px;font-weight:600;
+      letter-spacing:.14em;text-transform:uppercase;white-space:nowrap
+    }
+    .price-card h3{font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin:0}
+    .price{font:500 55px/.9 var(--serif);color:var(--gold2);margin:25px 0 32px}
+    .price-card ul{list-style:none;padding:0;margin:0 0 35px;flex:1}
+    .price-card li{padding:11px 0;border-bottom:1px solid var(--line);font-size:12px;line-height:1.5;color:var(--muted)}
+    .price-card li:before{content:"✓";color:var(--gold2);margin-right:10px}
+    .price-card .btn{width:100%;border-color:var(--ink);color:var(--ink)}
+    .price-card .btn:hover{background:var(--ink);color:#fff}
+
+    /* Process */
+    .process{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+    .process:before{content:"";position:absolute;left:8%;right:8%;top:27px;height:1px;background:var(--line)}
+    .step{text-align:center;position:relative;padding:0 12px}
+    .step-no{
+      width:54px;height:54px;margin:0 auto 20px;border:1px solid var(--gold);
+      border-radius:50%;background:var(--cream);display:grid;place-items:center;
+      color:var(--gold2);font:400 20px var(--serif)
+    }
+    .step h3{font-size:10px;letter-spacing:.13em;text-transform:uppercase;line-height:1.5;margin:0 0 8px}
+    .step p{font-size:11px;line-height:1.6;color:var(--muted);font-weight:300;margin:0}
+
+    /* Trust / CTA */
+    .trust{background:#1d1d1b;color:#fff;text-align:center}
+    .trust .section-title{color:#fff}
+    .checks{display:flex;justify-content:center;gap:35px;flex-wrap:wrap;margin-top:35px}
+    .check{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+    .check span{color:var(--gold);font-size:16px;margin-right:8px}
+    .cta{
+      padding:125px 0;text-align:center;position:relative;overflow:hidden
+    }
+    .cta:before{
+      content:"";position:absolute;width:500px;height:500px;border-radius:50%;
+      background:rgba(197,166,106,.1);filter:blur(70px);right:-180px;top:-220px
+    }
+    .cta-content{position:relative}
+    .cta .section-title{font-size:clamp(50px,8vw,90px);max-width:900px;margin:18px auto 25px}
+    .cta-copy{max-width:560px;margin:0 auto 32px;color:var(--muted);font-weight:300;line-height:1.8}
+
+    footer{background:#111;color:rgba(255,255,255,.45);padding:34px 0}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:25px}
+    .footer-brand{color:#fff;font:400 24px var(--serif);letter-spacing:.08em}
+    .footer-links{display:flex;gap:22px;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+    .footer-links a:hover{color:var(--gold)}
+    .copyright{font-size:9px;letter-spacing:.08em}
+
+
+    .hero-start-price{margin-top:20px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.55);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+    .hero-start-price strong{color:var(--gold);font-size:15px;letter-spacing:.04em}
+    .reasons{background:#f0ece3}
+    .reason-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+    .reason-card{background:var(--cream);padding:36px 30px;min-height:250px;transition:.3s}
+    .reason-card:hover{background:var(--paper);transform:translateY(-3px)}
+    .reason-icon{font:400 34px var(--serif);color:var(--gold2);margin-bottom:35px}
+    .reason-card h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 13px}
+    .reason-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.8;font-weight:300}
+    .portfolio-cta{margin-top:28px;padding:30px 35px;background:var(--black);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .portfolio-cta h3{margin:8px 0 0;font:500 30px/1.05 var(--serif)}
+    .portfolio-cta h3 em{color:var(--gold);font-style:italic}
+    .btn-dark{background:#fff;color:var(--black)}
+    .btn-dark:hover{background:var(--gold);transform:translateY(-2px)}
+    .cta-points{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:-8px auto 30px;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+    .cta-points span:first-child{color:var(--gold2)}
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed;inset:0;z-index:200;background:rgba(10,10,9,.96);
+      display:none;align-items:center;justify-content:center;padding:30px
+    }
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain}
+    .close{
+      position:absolute;right:25px;top:20px;border:0;background:none;color:#fff;
+      font-size:34px;cursor:pointer;font-weight:200
+    }
+
+    @media(max-width:850px){
+      .nav-links,.nav-cta{display:none}.menu{display:block}
+      .nav.open .nav-links{
+        display:flex;position:absolute;top:78px;left:0;right:0;
+        padding:25px 20px;flex-direction:column;background:rgba(23,23,22,.98)
+      }
+      .hero-content{padding-top:125px}
+      .split{grid-template-columns:1fr;gap:35px}
+      .services{grid-template-columns:1fr}
+      .prices{grid-template-columns:1fr;max-width:520px;margin:auto}
+      .price-card.featured{transform:none}
+      .process{grid-template-columns:1fr;gap:28px}.reason-grid{grid-template-columns:1fr 1fr}.portfolio-cta{align-items:flex-start;flex-direction:column}
+      .process:before{display:none}
+      .gallery{grid-template-columns:1fr 1fr}
+      .gallery-item:nth-child(n){grid-column:span 1;aspect-ratio:4/5}
+      .gallery-item:nth-child(2),.gallery-item:nth-child(6){aspect-ratio:4/5}
+      .footer-inner{flex-direction:column;text-align:center}
+    }
+    @media(max-width:560px){
+      .container{width:min(calc(100% - 28px),var(--max))}
+      .section{padding:78px 0}
+      .hero h1{font-size:57px}.hero h1 span{margin-left:5%}
+      .hero-copy{font-size:14px}
+      .hero-actions .btn{width:100%}
+      .quote{font-size:24px}
+      .compare{aspect-ratio:4/5}
+      .service{padding:32px 25px;min-height:235px}
+      .gallery{grid-template-columns:1fr}
+      .gallery-item:nth-child(n){grid-column:span 1;aspect-ratio:4/5}
+      .checks{flex-direction:column;gap:14px}.reason-grid{grid-template-columns:1fr}.portfolio-cta{padding:28px 22px}.portfolio-cta h3{font-size:27px}.portfolio-cta .btn{width:100%}.cta-points{flex-direction:column;align-items:center;gap:10px}
+      .footer-links{flex-wrap:wrap;justify-content:center}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- НАСТРОЙКИ САЙТА -->
+  <script>
+    const CONFIG = {
+      email: "sav984@ya.ru",
+      vkLink: "https://vk.com/s_o_l_o_v_e_y_p_t_a_h_a"
+    };
+  </script>
+
+  <header class="header" id="header">
+    <div class="container nav" id="nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">L</span>
+        <span class="brand-text">Luxury Photo Retouch</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#about">Подход</a><a href="#why">Почему я</a>
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Работы</a>
+        <a href="#prices">Цены</a>
+        <a href="#process">Как это работает</a>
+      </nav>
+
+      <a class="nav-cta" id="navContact" href="#">Связаться</a>
+      <button class="menu" id="menuBtn" aria-label="Открыть меню">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=85&w=2200&auto=format&fit=crop" alt="">
+      </div>
+      <div class="container hero-content reveal">
+        <span class="eyebrow">Персональная обработка фотографий</span>
+        <h1>Фотография<br><span>должна быть живой.</span></h1>
+        <p class="hero-copy">
+          Профессиональная ретушь без эффекта «пластиковой кожи».
+          Сохраняю человека, характер и естественные детали — просто делаю снимок визуально сильнее.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#cta">Отправить фотографию</a>
+          <a class="btn btn-outline" href="#portfolio">Посмотреть работы</a>
+        </div>
+        <div class="hero-note">Удалённая работа · Без необходимости выходить из дома</div><div class="hero-start-price"><span>Обработка фотографии</span> от <strong>390 ₽</strong></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container split">
+        <div class="reveal">
+          <div class="intro-number">01</div>
+          <span class="eyebrow">Мой принцип</span>
+          <h2 class="section-title">Красиво —<br><em>не значит искусственно.</em></h2>
+        </div>
+        <div class="reveal">
+          <p class="quote">«Хорошая ретушь не должна кричать о себе. Она должна заставить вас дольше смотреть на фотографию.»</p>
+          <p class="lead">
+            Я не меняю лицо человека и не создаю другого человека вместо него.
+            Работаю со светом, цветом, деталями и аккуратной ретушью, чтобы сохранить индивидуальность снимка.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Результат</span>
+          <h2 class="section-title">Одна фотография.<br><em>Два впечатления.</em></h2>
+          <p class="lead">Потяните ползунок и сравните исходник с обработанной версией.</p>
+        </div>
+
+        <div class="compare reveal" id="compare">
+          <!-- ЗАМЕНИТЕ ЭТИ ДВА URL НА СВОИ ФОТО -->
+          <img class="compare-after" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=85&w=1800&auto=format&fit=crop" alt="После обработки">
+          <div class="compare-before-wrap" id="beforeWrap">
+            <img class="compare-before" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=85&w=1800&auto=format&fit=crop" alt="До обработки">
+          </div>
+          <input class="compare-range" id="compareRange" type="range" min="0" max="100" value="50" aria-label="Сравнение до и после">
+          <div class="compare-line" id="compareLine"><div class="compare-handle">↔</div></div>
+          <span class="compare-label before-label">До</span>
+          <span class="compare-label after-label">После</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reasons" id="why">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Почему мне доверяют</span>
+          <h2 class="section-title">Не просто обработка.<br><em>Внимание к вашей фотографии.</em></h2>
+          <p class="lead">Мне важно, чтобы после обработки вы увидели себя — только в более удачном свете.</p>
+        </div>
+        <div class="reason-grid">
+          <article class="reason-card reveal"><div class="reason-icon">01</div><h3>Сохраняю вас</h3><p>Не меняю черты лица ради модного эффекта. Индивидуальность фотографии остаётся на первом месте.</p></article>
+          <article class="reason-card reveal"><div class="reason-icon">02</div><h3>Работаю аккуратно</h3><p>Кожа остаётся живой, детали — естественными, а ретушь не должна бросаться в глаза.</p></article>
+          <article class="reason-card reveal"><div class="reason-icon">03</div><h3>Сначала оценка</h3><p>Вы присылаете снимок, я смотрю задачу и объясняю, что можно сделать и сколько это будет стоить.</p></article>
+          <article class="reason-card reveal"><div class="reason-icon">04</div><h3>Без поездок</h3><p>Всё проходит дистанционно: фотография, согласование, обработка и готовый результат.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Услуги</span>
+          <h2 class="section-title">Что можно сделать<br><em>с вашей фотографией</em></h2>
+          <p class="lead">От лёгкой коррекции до сложной художественной работы.</p>
+        </div>
+
+        <div class="services">
+          <article class="service reveal">
+            <span class="service-num">01</span><span class="service-price">от 390 ₽</span>
+            <h3>Портретная ретушь</h3>
+            <p>Свет, цвет, аккуратная работа с кожей, деталями и общей выразительностью портрета.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">02</span><span class="service-price">от 390 ₽</span>
+            <h3>Семейные фотографии</h3>
+            <p>Гармоничная обработка семейных и групповых снимков с сохранением естественности.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">03</span><span class="service-price">от 390 ₽</span>
+            <h3>Фото для соцсетей</h3>
+            <p>Подготовка фотографий для VK, Telegram, Дзен и других площадок.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">04</span><span class="service-price">по задаче</span>
+            <h3>Восстановление старых фото</h3>
+            <p>Устранение повреждений, выцветания и дефектов. При необходимости — колоризация.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">05</span><span class="service-price">по задаче</span>
+            <h3>Художественная обработка</h3>
+            <p>Создание особого настроения, стилистики и премиального визуального образа.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">06</span><span class="service-price">индивидуально</span>
+            <h3>Сложные проекты</h3>
+            <p>Сложная ретушь и композиционные задачи — стоимость согласовывается до начала работы.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portfolio">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Портфолио</span>
+          <h2 class="section-title">Работы <em>без лишнего шума.</em></h2>
+          <p class="lead">Нажмите на изображение, чтобы открыть его крупнее.</p>
+        </div>
+
+        <div class="gallery">
+          <!-- ЗАМЕНИТЕ КАРТИНКИ НА СВОИ -->
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=85&w=1000&auto=format&fit=crop" alt="Портрет — работа 1"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=85&w=1200&auto=format&fit=crop" alt="Портрет — работа 2"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=85&w=1000&auto=format&fit=crop" alt="Портрет — работа 3"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=85&w=1000&auto=format&fit=crop" alt="Портрет — работа 4"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=85&w=1000&auto=format&fit=crop" alt="Портрет — работа 5"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?q=85&w=1200&auto=format&fit=crop" alt="Портрет — работа 6"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=85&w=1000&auto=format&fit=crop" alt="Портрет — работа 7"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="prices" style="background:#eeeae1">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Стоимость</span>
+          <h2 class="section-title">Просто.<br><em>Понятно.</em></h2>
+          <p class="lead">Финальная стоимость сложных задач согласовывается до начала работы.</p>
+        </div>
+
+        <div class="prices">
+          <article class="price-card reveal">
+            <h3>Стандарт</h3>
+            <div class="price">390 ₽</div>
+            <ul>
+              <li>улучшение света</li><li>цветокоррекция</li><li>повышение качества</li><li>базовая обработка</li><li>1 готовый вариант</li>
+            </ul>
+            <a class="btn" href="#cta">Выбрать</a>
+          </article>
+
+          <article class="price-card featured reveal">
+            <div class="badge">Популярный выбор</div>
+            <h3>Премиум</h3>
+            <div class="price">690 ₽</div>
+            <ul>
+              <li>профессиональная ретушь</li><li>свет и цвет</li><li>улучшение деталей</li><li>естественная обработка кожи</li><li>2–3 варианта</li><li>одна корректировка</li>
+            </ul>
+            <a class="btn" href="#cta">Выбрать</a>
+          </article>
+
+          <article class="price-card reveal">
+            <h3>VIP</h3>
+            <div class="price">1190 ₽</div>
+            <ul>
+              <li>глубокая ретушь</li><li>художественная обработка</li><li>индивидуальный стиль</li><li>сложная работа с деталями</li><li>несколько вариантов</li><li>индивидуальные пожелания</li>
+            </ul>
+            <a class="btn" href="#cta">Выбрать</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Процесс</span>
+          <h2 class="section-title">От фотографии<br><em>до результата.</em></h2>
+        </div>
+
+        <div class="process">
+          <div class="step reveal"><div class="step-no">01</div><h3>Вы присылаете фото</h3><p>VK или E-mail.</p></div>
+          <div class="step reveal"><div class="step-no">02</div><h3>Я оцениваю задачу</h3><p>Говорю, что можно улучшить.</p></div>
+          <div class="step reveal"><div class="step-no">03</div><h3>Согласовываем цену</h3><p>Без сюрпризов после работы.</p></div>
+          <div class="step reveal"><div class="step-no">04</div><h3>Я обрабатываю</h3><p>Аккуратно и с учётом пожеланий.</p></div>
+          <div class="step reveal"><div class="step-no">05</div><h3>Вы получаете результат</h3><p>Готовое изображение.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section trust">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Мой подход</span>
+          <h2 class="section-title">Не люблю пластиковую<br><em>красоту. И вам не советую.</em></h2>
+          <p class="lead">Главная задача — сохранить человека настоящим и сделать фотографию визуально сильнее.</p>
+        </div>
+        <div class="checks reveal">
+          <div class="check"><span>✓</span> Без изменения личности</div>
+          <div class="check"><span>✓</span> Без мыльной кожи</div>
+          <div class="check"><span>✓</span> Без потери естественности</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="cta">
+      <div class="container cta-content reveal">
+        <span class="eyebrow">Начнём с вашей фотографии</span>
+        <h2 class="section-title">А что можно сделать<br><em>именно с вашей?</em></h2>
+        <p class="cta-copy">Пришлите фотографию. Я посмотрю её и скажу, какую обработку лучше сделать и сколько это будет стоить.</p>
+        <div class="cta-points"><span>✓ От 390 ₽</span><span>✓ Предварительная оценка</span><span>✓ Без обязательств</span></div>
+        <div class="hero-actions" style="justify-content:center">
+          <a class="btn btn-gold" id="vkBtn" href="#">Написать в VK</a>
+          <a class="btn" id="mailBtn" href="#" style="border-color:var(--ink)">Написать по E-mail</a>
+        </div>
+        <p style="font-size:10px;color:var(--muted);margin-top:22px;letter-spacing:.12em;text-transform:uppercase">Отправка фотографии ни к чему вас не обязывает.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Luxury Photo Retouch</div>
+        <div style="font-size:9px;margin-top:5px;letter-spacing:.12em;text-transform:uppercase">Профессиональная обработка личных фотографий</div>
+      </div>
+      <div class="footer-links">
+        <a id="footerVk" href="#">VK</a>
+        <a id="footerMail" href="#">E-mail</a>
+      </div>
+      <div class="copyright">© 2026 Все права защищены</div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="close" id="closeLightbox" aria-label="Закрыть">×</button>
+    <img id="lightboxImg" src="" alt="Увеличенное изображение">
+  </div>
+
+  <script>
+    const header = document.getElementById("header");
+    const nav = document.getElementById("nav");
+    const menuBtn = document.getElementById("menuBtn");
+
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 40);
+    });
+
+    menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
+    document.querySelectorAll(".nav-links a").forEach(a => {
+      a.addEventListener("click", () => nav.classList.remove("open"));
+    });
+
+    const mail = "mailto:" + CONFIG.email;
+    ["navContact","mailBtn","footerMail"].forEach(id => document.getElementById(id).href = mail);
+    ["vkBtn","footerVk"].forEach(id => document.getElementById(id).href = CONFIG.vkLink);
+    document.getElementById("navContact").target = "_blank";
+    document.getElementById("vkBtn").target = "_blank";
+    document.getElementById("footerVk").target = "_blank";
+
+    // Before / After
+    const range = document.getElementById("compareRange");
+    const beforeWrap = document.getElementById("beforeWrap");
+    const compareLine = document.getElementById("compareLine");
+
+    function updateCompare(value){
+      beforeWrap.style.width = value + "%";
+      compareLine.style.left = value + "%";
+    }
+    range.addEventListener("input", e => updateCompare(e.target.value));
+    updateCompare(range.value);
+
+    // Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeLightbox = () => {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden","true");
+      document.body.classList.remove("lock");
+      lightboxImg.src = "";
+    };
+
+    document.querySelectorAll(".gallery-item img").forEach(img => {
+      img.parentElement.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden","false");
+        document.body.classList.add("lock");
+      });
+    });
+
+    document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", e => { if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", e => { if(e.key === "Escape") closeLightbox(); });
+  </script>
+</body>
+</html>
